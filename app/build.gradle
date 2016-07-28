@@ -1,0 +1,99 @@
+apply plugin: 'com.android.application'
+apply plugin : 'checkstyle'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        applicationId "com.simple.gradleplugin"
+        minSdkVersion 10
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        disable 'TypographyFractions','TypographyQuotes'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:design:23.0.1'
+}
+
+// 添加 插件依赖
+buildscript {
+    repositories {
+        maven {
+            url uri('../repo')
+        }
+    }
+    dependencies {
+//        类库的名字以及版本
+        classpath 'com.simple.plugin:translateplugin:1.0.0'
+    }
+}
+
+// 编译任务依赖aCheckstyle就可以先检测再
+task aCheckstyle(type: Checkstyle, group:'checkstyle'){
+//    在这里可以清空之前的报告
+    println( "xml输出 : " + reports.xml.destination )
+    configFile file("../config/checkstyle/checkstyle.xml")
+    source 'src/main'
+    include '**/*.java'
+    exclude '**/gen/**'
+    classpath = files()
+
+    reports {
+        println "======= output html reports ======== \n"
+        // 注意: 如果清空build目录之后再运行可能会导致失败,此时注释掉下面两行再重新运行,等build/reports/checkstyle 目录下
+        // 生成了xml之后再放开注释即可.
+        ant.xslt(in: reports.xml.destination,
+                style: new File('../config/xsl/checkstyle-noframes-sorted.xsl'),
+                out: new File(reports.xml.destination.parent, 'checkstyle-report.html'))
+    }
+}
+
+task cleanup(group:'checkstyle') {
+    println "输出报告之后的操作...."
+}
+
+aCheckstyle {}.finalizedBy cleanup
+
+
+
+//gradle-plugin下的文件名
+apply plugin: 'com.simple.translate.plugin'
+
+// 应用插件之后设置自定义插件的参数
+buildParams {
+    applicationId = "my.custom.app"
+    minSDK = 14
+    compileParams {
+        signConfig = "my.keystore"
+        minifyEnabled = true
+    }
+}
+
+tasks.findAll { task ->
+//    println "task name : " + task.name
+    if ( task.name.equals("customAppTask") ) {
+        task.doFirst {
+            println("在执行自定义编译之前: \n\n")
+        }
+    }
+}
+
+tasks.findByName("assembleDebug").dependsOn aCheckstyle
+tasks.findByName("build").doFirst { println "assemble debug execute" }
+
