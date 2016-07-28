@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin : 'checkstyle'
+apply plugin: 'checkstyle'
 
 android {
     compileSdkVersion 23
@@ -20,7 +20,7 @@ android {
     }
 
     lintOptions {
-        disable 'TypographyFractions','TypographyQuotes'
+        disable 'TypographyFractions', 'TypographyQuotes'
     }
 }
 
@@ -29,6 +29,12 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:design:23.0.1'
+
+    // 依赖 robolectric
+    testCompile "org.robolectric:robolectric:3.1.1"
+    // Optional -- Mockito framework
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    androidTestCompile 'junit:junit:4.12'
 }
 
 // 添加 插件依赖
@@ -39,15 +45,14 @@ buildscript {
         }
     }
     dependencies {
-//        类库的名字以及版本
+        // 自定义插件, 类库的名字以及版本
         classpath 'com.simple.plugin:translateplugin:1.0.0'
     }
 }
 
 // 编译任务依赖aCheckstyle就可以先检测再
-task aCheckstyle(type: Checkstyle, group:'checkstyle'){
-//    在这里可以清空之前的报告
-    println( "xml输出 : " + reports.xml.destination )
+task checkstyle(type: Checkstyle) {
+//    println("xml输出 : " + reports.xml.destination)
     configFile file("../config/checkstyle/checkstyle.xml")
     source 'src/main'
     include '**/*.java'
@@ -55,7 +60,6 @@ task aCheckstyle(type: Checkstyle, group:'checkstyle'){
     classpath = files()
 
     reports {
-        println "======= output html reports ======== \n"
         // 注意: 如果清空build目录之后再运行可能会导致失败,此时注释掉下面两行再重新运行,等build/reports/checkstyle 目录下
         // 生成了xml之后再放开注释即可.
         ant.xslt(in: reports.xml.destination,
@@ -64,14 +68,13 @@ task aCheckstyle(type: Checkstyle, group:'checkstyle'){
     }
 }
 
-task cleanup(group:'checkstyle') {
-    println "输出报告之后的操作...."
-}
+//task cleanup(group:'checkstyle') {
+//    println "输出报告之后的操作...."
+//}
+//
+//aCheckstyle.finalizedBy cleanup
 
-aCheckstyle {}.finalizedBy cleanup
-
-
-
+// 使用我的自定义插件
 //gradle-plugin下的文件名
 apply plugin: 'com.simple.translate.plugin'
 
@@ -85,15 +88,4 @@ buildParams {
     }
 }
 
-tasks.findAll { task ->
-//    println "task name : " + task.name
-    if ( task.name.equals("customAppTask") ) {
-        task.doFirst {
-            println("在执行自定义编译之前: \n\n")
-        }
-    }
-}
-
-tasks.findByName("assembleDebug").dependsOn aCheckstyle
-tasks.findByName("build").doFirst { println "assemble debug execute" }
 
