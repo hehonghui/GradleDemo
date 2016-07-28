@@ -7,6 +7,7 @@ import android.util.Log;
  */
 public class UglyClass {
     private int myAge;
+    public String name ;
 
     void sayHello(int i)
     {
