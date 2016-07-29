@@ -6,11 +6,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 /**
  * 应用主页面
  */
 public class MainActivity extends AppCompatActivity {
+
+    TextView textView ;
 
     @Override
     protected final void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,21 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+       textView =  (TextView) findViewById(R.id.main_tv) ;
+        textView.setText("onCreate");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        textView.setText("onResume");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        textView.setText("onDestroy");
     }
 }
 

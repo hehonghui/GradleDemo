@@ -1,7 +1,7 @@
-package com.simple.gradleplugin;
+package com.simple.gradleplugin.presenter;
 
+import com.simple.gradleplugin.BuildConfig;
 import com.simple.gradleplugin.dao.NewsDAO;
-import com.simple.gradleplugin.presenter.NewsPresenter;
 
 import junit.framework.TestCase;
 

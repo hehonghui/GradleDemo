@@ -68,11 +68,6 @@ task checkstyle(type: Checkstyle) {
     }
 }
 
-//task cleanup(group:'checkstyle') {
-//    println "输出报告之后的操作...."
-//}
-//
-//aCheckstyle.finalizedBy cleanup
 
 // 使用我的自定义插件
 //gradle-plugin下的文件名
