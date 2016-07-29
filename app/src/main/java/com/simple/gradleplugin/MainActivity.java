@@ -13,7 +13,7 @@ import android.widget.TextView;
  */
 public class MainActivity extends AppCompatActivity {
 
-    TextView textView ;
+    TextView textView;
 
     @Override
     protected final void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-       textView =  (TextView) findViewById(R.id.main_tv) ;
+        textView = (TextView) findViewById(R.id.main_tv);
         textView.setText("onCreate");
     }
 
