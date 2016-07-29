@@ -17,3 +17,8 @@
 > 1. git commit 阶段执行 checkstyle
 > 2. git push 阶段执行 ut
 > 3. pull request时执行code review
+
+## 参考文章
+
+[解读Android官方MVP项目单元测试](http://www.jianshu.com/p/cf446be43ae8)
+[Google Application Architecture](https://github.com/googlesamples/android-architecture/tree/todo-mvp)
