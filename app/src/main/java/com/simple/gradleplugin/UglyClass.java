@@ -7,14 +7,13 @@ import android.util.Log;
  */
 public class UglyClass {
     private int myAge;
-    public String name ;
+    public String name;
 
-    void sayHello(int i)
-    {
-        if ( i==0)
-        {
+    void sayHello(int i) {
+        if (i == 0) {
             Log.e("", "hello");
+        } else {
+            Log.e("", "no talk");
         }
-        else Log.e("","no talk");
     }
 }

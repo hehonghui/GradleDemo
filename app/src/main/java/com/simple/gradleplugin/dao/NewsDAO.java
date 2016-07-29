@@ -13,27 +13,27 @@ import java.util.Map;
  */
 public class NewsDAO {
 
-    private Map<Integer, String> mCaches = new HashMap<>() ;
+    private Map<Integer, String> mCaches = new HashMap<>();
 
     public boolean insert(int id, String newsItem) {
-        Log.e("", "### 插入数据 : " + newsItem) ;
-        mCaches.put(id, newsItem) ;
-        return true ;
+        Log.e("", "### 插入数据 : " + newsItem);
+        mCaches.put(id, newsItem);
+        return true;
     }
 
     public String query(int id) {
-        return mCaches.get(id) ;
+        return mCaches.get(id);
     }
 
     public List<String> loadDataFromDatabase() {
-        Log.e("", "### 耗时操作") ;
+        Log.e("", "### 耗时操作");
         mCaches.keySet();
-        List<String> caches = new ArrayList<>() ;
-        Iterator<Integer> iterator = mCaches.keySet().iterator() ;
-        while ( iterator.hasNext() ) {
-            int key = iterator.next() ;
+        List<String> caches = new ArrayList<>();
+        Iterator<Integer> iterator = mCaches.keySet().iterator();
+        while (iterator.hasNext()) {
+            int key = iterator.next();
             caches.add(mCaches.get(key));
         }
-        return caches ;
+        return caches;
     }
 }

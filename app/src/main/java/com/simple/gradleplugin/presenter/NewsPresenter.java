@@ -7,14 +7,12 @@ import com.simple.gradleplugin.dao.NewsDAO;
 import java.util.List;
 
 /**
- *
  * Mockito 文档: http://mockito.org/
  * Created by mrsimple on 28/7/16.
  */
 public class NewsPresenter {
 
     NewsDAO mDao = new NewsDAO();
-
 
     public void setDao(NewsDAO dao) {
         this.mDao = dao;
