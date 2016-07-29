@@ -11,6 +11,7 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.Collections;
+import java.util.Random;
 
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Mockito.mock;
@@ -79,6 +80,7 @@ public class NewsPresenterTest extends TestCase {
 
     @Test
     public void testFailed() {
-        assertTrue(  1 > 2 );
+        // 随机数,有一定积累测试失败
+        assertTrue(  new Random().nextInt(5) % 2 == 0 );
     }
 }

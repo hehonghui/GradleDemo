@@ -14,6 +14,8 @@
   is a high priority goal for the development team.
 -->
 
+<!--checkstyle规则说明, 参考: http://www.blogjava.net/askcuix/archive/2009/02/08/253775.html -->
+
 <module name="Checker">
 
     <module name="TreeWalker">
@@ -93,6 +95,9 @@
         <module name="OperatorWrap"/>
         <!-- 检查强制转型的圆括号的空白规则。-->
         <module name="TypecastParenPad"/>
+
+        <!-- 代码缩进   -->
+        <module name="Indentation" />
 
         <!-- 检查’{’和左边的代码块是否在同一行。-->
         <module name="LeftCurly"/>
