@@ -25,8 +25,9 @@
 1. Robolectric 、Mockito 测试业务逻辑, 包括 数据库、网络数据解析、Presenter业务逻辑, 脱离Android虚拟机,测试更快速.
 2. Espresso 测试部分稳定的ui逻辑
 
+注意两种测试类型的配置
 
 ## 参考文章
 
-[解读Android官方MVP项目单元测试](http://www.jianshu.com/p/cf446be43ae8)
-[Google Application Architecture](https://github.com/googlesamples/android-architecture/tree/todo-mvp)
+* [解读Android官方MVP项目单元测试](http://www.jianshu.com/p/cf446be43ae8)
+* [Google Application Architecture](https://github.com/googlesamples/android-architecture/tree/todo-mvp)
