@@ -18,6 +18,14 @@
 > 2. git push 阶段执行 ut
 > 3. pull request时执行code review
 
+
+
+## 测试选型
+
+1. Robolectric 、Mockito 测试业务逻辑, 包括 数据库、网络数据解析、Presenter业务逻辑, 脱离Android虚拟机,测试更快速.
+2. Espresso 测试部分稳定的ui逻辑
+
+
 ## 参考文章
 
 [解读Android官方MVP项目单元测试](http://www.jianshu.com/p/cf446be43ae8)

@@ -81,6 +81,6 @@ public class NewsPresenterTest extends TestCase {
     @Test
     public void testFailed() {
         // 随机数,有一定积累测试失败
-        assertTrue(  new Random().nextInt(5) % 2 == 0 );
+//        assertTrue(  new Random().nextInt(5) % 2 == 0 );
     }
 }
